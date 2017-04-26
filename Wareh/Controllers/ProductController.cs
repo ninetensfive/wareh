@@ -63,12 +63,12 @@ namespace Wareh.Controllers
                         Barcode = productViewModel.Product.Barcode,
                         ManufacturerId = productViewModel.Product.ManufacturerId,
                         Suppliers = suppliers,
-                        
+
                     };
 
                     db.Products.Add(product);
                     db.SaveChanges();
-               
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -112,13 +112,64 @@ namespace Wareh.Controllers
                 viewModel.Manufacturers = manufacturers;
                 viewModel.Suppliers = suppliers;
                 viewModel.SelectedSuppliers = product.Suppliers.Select(s => s.Id).ToList();
-                
 
-             
+
+
 
 
                 return View(viewModel);
             }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProductViewModel productViewModel, int[] selectedSuppliers)
+        {
+
+            int? id = int.Parse(RouteData.Values["Id"].ToString());
+
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+
+            using (var db = new ApplicationDbContext())
+            {
+
+                var suppliers = db.Suppliers.Where(s => selectedSuppliers.Contains(s.Id)).ToList();
+
+                var product = db.Products.Find(id);
+
+                for (var i = 0; i < product.Suppliers.Count; i++)
+                {
+                    product.Suppliers.Remove(product.Suppliers[i]);
+                }
+
+
+
+                product.Name = productViewModel.Product.Name;
+                product.Barcode = productViewModel.Product.Barcode;
+                product.ManufacturerId = productViewModel.Product.ManufacturerId;
+                product.Suppliers = suppliers;
+
+
+
+                if (ModelState.IsValid)
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                var manufacturers = db.Manufacturers.ToList();
+                suppliers = db.Suppliers.ToList();
+
+                productViewModel.Manufacturers = manufacturers;
+                productViewModel.Suppliers = suppliers;
+            }
+
+            return View(productViewModel);
+
         }
     }
 }

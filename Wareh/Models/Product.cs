@@ -10,7 +10,7 @@ namespace Wareh.Models
     {
         public Product()
         {
-            this.Suppliers = new HashSet<Supplier>();
+            this.Suppliers = new List<Supplier>();
         }
 
         public int Id { get; set; }
@@ -27,6 +27,6 @@ namespace Wareh.Models
 
         public virtual Manufacturer Manufacturer { get; set; }   
 
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public virtual List<Supplier> Suppliers { get; set; }
     }
 }
