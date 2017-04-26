@@ -1,0 +1,38 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("|_W A R E H_|", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                @if (User.IsInRole("Admin"))
+                {
+                <li>
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Register User", "Register", "Account")</li>
+                    </ul>
+                </li>
+                }
+
+                <li>
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Companies<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Manufacturers", "Index", "Manufacturer")</li>
+                        <li>@Html.ActionLink("Suppliers", "Index", "Supplier")</li>
+                    </ul>
+                </li>
+
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>
+

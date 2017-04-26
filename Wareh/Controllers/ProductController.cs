@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Wareh.Models;
+using Wareh.ViewModels;
+using System.Data.Entity;
+
+
+namespace Wareh.Controllers
+{
+    public class ProductController : Controller
+    {
+        [HttpGet]
+        public ActionResult Index()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var products = db.Products.Include(m => m.Manufacturer).Include(s => s.Suppliers).ToList();
+
+                return View(products);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var manufacturers = db.Manufacturers.ToList();
+                var suppliers = db.Suppliers.ToList();
+
+                var viewModel = new ProductViewModel
+                {
+                    Manufacturers = manufacturers,
+                    Suppliers = suppliers
+                    //Product = new Product()
+
+                };
+                //viewModel.Product.Suppliers = suppliers;
+
+                return View(viewModel);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Create(ProductViewModel productViewModel, int[] selectedSuppliers)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new ApplicationDbContext())
+                {
+                    //var suppliers = new HashSet<Supplier>();
+
+                    var suppliers = db.Suppliers.Where(s => selectedSuppliers.Contains(s.Id)).ToList();
+
+                    var product = new Product
+                    {
+                        Name = productViewModel.Product.Name,
+                        Barcode = productViewModel.Product.Barcode,
+                        ManufacturerId = productViewModel.Product.ManufacturerId,
+                        Suppliers = suppliers,
+                        
+                    };
+
+                    db.Products.Add(product);
+                    db.SaveChanges();
+               
+                    return RedirectToAction("Index", "Home");
+                }
+
+
+            }
+            //return new HttpNotFoundResult();
+            using (var db = new ApplicationDbContext())
+            {
+                var manufacturers = db.Manufacturers.ToList();
+                var suppliers = db.Suppliers.ToList();
+
+                var viewModel = new ProductViewModel
+                {
+                    Manufacturers = manufacturers,
+                    Suppliers = suppliers,
+                    Product = productViewModel.Product
+
+                };
+
+                return View(viewModel);
+            }
+
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var product = db.Products.Find(id);
+
+                if (product == null)
+                {
+                    RedirectToAction("Index");
+                }
+                var manufacturers = db.Manufacturers.ToList();
+                var suppliers = db.Suppliers.ToList();
+
+                var viewModel = new ProductViewModel();
+                viewModel.Product = product;
+                viewModel.Manufacturers = manufacturers;
+                viewModel.Suppliers = suppliers;
+                viewModel.SelectedSuppliers = product.Suppliers.Select(s => s.Id).ToList();
+                
+
+             
+
+
+                return View(viewModel);
+            }
+        }
+    }
+}
