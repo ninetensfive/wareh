@@ -1,0 +1,67 @@
+﻿@model Wareh.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<span class="pull-right">
+
+    <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@Model.Id" class="btn btn-warning">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+    </a>
+</span>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Barcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Barcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Suppliers)
+        </dt>
+
+        <dd>
+            @foreach (var supplier in Model.Suppliers)
+            {
+                @supplier.Name
+                <br>
+            }
+        </dd>
+
+    </dl>
+</div>
+<p class="pull-right">
+
+    <div>
+        <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Index" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Back to List
+        </a>
+    </div>
+
+</p>

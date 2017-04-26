@@ -9,6 +9,7 @@ using Wareh.ViewModels;
 using System.Data.Entity;
 
 
+
 namespace Wareh.Controllers
 {
     public class ProductController : Controller
@@ -170,6 +171,24 @@ namespace Wareh.Controllers
 
             return View(productViewModel);
 
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var product = db.Products.Include(m => m.Manufacturer)
+                    .Include(s => s.Suppliers)
+                    .SingleOrDefault(p => p.Id == id);
+
+                if (product == null)
+                {
+                    RedirectToAction("Index");
+                }
+
+                return View(product);
+            }
         }
     }
 }
