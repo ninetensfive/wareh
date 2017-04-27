@@ -12,12 +12,12 @@
             <ul class="nav navbar-nav">
                 @if (User.IsInRole("Admin"))
                 {
-                <li>
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Register User", "Register", "Account")</li>
-                    </ul>
-                </li>
+                    <li>
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Register User", "Register", "Account")</li>
+                        </ul>
+                    </li>
                 }
 
                 <li>
@@ -32,7 +32,10 @@
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Products", "Index", "Product")</li>
                     </ul>
-                </li>                
+                </li>
+                <li>
+                    @Html.ActionLink("Purchase Orders", "Index", "PurchaseOrder")
+                </li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
