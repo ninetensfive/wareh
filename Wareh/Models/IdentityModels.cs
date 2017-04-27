@@ -35,5 +35,8 @@ namespace Wareh.Models
         public System.Data.Entity.DbSet<Wareh.Models.Supplier> Suppliers { get; set; }
 
         public System.Data.Entity.DbSet<Wareh.Models.Product> Products { get; set; }
+
+        public System.Data.Entity.DbSet<Wareh.Models.PurchaseOrder> PurchaseOrders { get; set; }
+
     }
 }
