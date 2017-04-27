@@ -31,3 +31,16 @@ textarea {
     border: 1px solid red;
 }
 
+
+.navbar{
+    min-height: 100px !important;
+    background-image: url("Images/black-pattern-background.png") !important;
+}
+
+.body-content{
+    margin-top: 50px !important;
+}
+
+footer{
+    text-align: center;
+}
