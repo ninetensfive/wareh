@@ -5,11 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using Wareh.Models;
 using Wareh.ViewModels;
+using System.Data.Entity;
 
 namespace Wareh.Controllers
 {
     public class PurchaseOrderController : Controller
     {
+        [HttpGet]
+        public ActionResult Index()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var purchaseOrders = db.PurchaseOrders
+                    .Include(s => s.Supplier)
+                    .Include(p => p.Product)
+                    .ToList();
+
+                return View(purchaseOrders);
+            }
+        }
+
         [HttpGet]
         public ActionResult Create(int? productId)
         {
