@@ -215,12 +215,14 @@
     <Compile Include="Controllers\Api\ProductController.cs" />
     <Compile Include="Controllers\Api\PurchaseOrderController.cs" />
     <Compile Include="Controllers\Api\SupplierController.cs" />
+    <Compile Include="Controllers\Api\WarehouseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +239,7 @@
     <Compile Include="Models\PurchaseOrder.cs" />
     <Compile Include="Models\Supplier.cs" />
     <Compile Include="Models\SupplierProduct.cs" />
+    <Compile Include="Models\Warehouse.cs" />
     <Compile Include="MyContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -542,6 +545,10 @@
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PurchaseOrder\Edit.cshtml" />
     <Content Include="Views\PurchaseOrder\Details.cshtml" />
+    <Content Include="Views\Warehouse\Create.cshtml" />
+    <Content Include="Views\Warehouse\Index.cshtml" />
+    <Content Include="Views\Warehouse\Edit.cshtml" />
+    <Content Include="Views\Warehouse\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

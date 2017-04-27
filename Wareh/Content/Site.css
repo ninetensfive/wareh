@@ -23,34 +23,34 @@ textarea {
     max-width: 280px;
 }
 
-.field-validation-error{
+.field-validation-error {
     color: red;
 }
 
-.input-validation-error{
+.input-validation-error {
     border: 1px solid red;
 }
 
 
-.navbar{
+.navbar {
     min-height: 100px !important;
     background-image: url("Images/black-pattern-background.png") !important;
 }
 
-.body-content{
+.body-content {
     margin-top: 50px !important;
 }
 
-footer{
+footer {
     text-align: center;
 }
 
-.dataTable{
+.dataTable {
     border: 1px solid #ddd;
     border-radius: 5px;
-    
 }
 
-.dataTable th{
-background-color: whitesmoke;
-}
+    .dataTable th {
+        background-color: whitesmoke;
+    }
+

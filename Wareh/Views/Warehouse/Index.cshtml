@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Wareh.Models.Supplier>
+﻿@model IEnumerable<Wareh.Models.Warehouse>
 
 @{
     ViewBag.Title = "Index";
@@ -11,8 +11,7 @@
         @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
     </p>
 </h2>
-
-<table class="table" id="suppliers">
+<table class="table" id="warehouses">
     <thead>
         <tr>
             <th>
@@ -26,9 +25,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HomePage)
             </th>
             <th></th>
         </tr>
@@ -50,9 +46,6 @@
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HomePage)
-                </td>
-                <td>
                     <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@item.Id" class="btn btn-xs btn-warning">
                         <span class="glyphicon glyphicon-pencil"></span>
                         Edit
@@ -63,7 +56,7 @@
                         Details
                     </a>
 
-                    <button data-supplier-id="@item.Id" class="btn btn-xs btn-danger wareh-delete">
+                    <button data-warehouse-id="@item.Id" class="btn btn-xs btn-danger wareh-delete">
                         <span class="glyphicon glyphicon-trash"></span>
                         Delete
                     </button>
@@ -72,19 +65,18 @@
         }
     </tbody>
 </table>
-
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            var table = $("#suppliers").DataTable();
+            var table = $("#warehouses").DataTable();
 
-            $("#suppliers").on("click", ".wareh-delete", function () {
+            $("#warehouses").on("click", ".wareh-delete", function () {
                 var button = $(this);
                 bootbox.confirm("Are you sure you want to delete this item?", function (result) {
                     if (result) {
                         $.ajax({
-                            url: "/api/supplier/" + button.attr("data-supplier-id"),
+                            url: "/api/warehouse/" + button.attr("data-warehouse-id"),
                             method: "DELETE",
                             success: function () {
                                 table.row(button.parents("tr")).remove().draw();
