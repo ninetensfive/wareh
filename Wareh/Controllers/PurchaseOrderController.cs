@@ -53,7 +53,7 @@ namespace Wareh.Controllers
                 return View(viewModel);
             }
 
-                
+
         }
 
         [HttpPost]
@@ -61,12 +61,12 @@ namespace Wareh.Controllers
         {
             if (productId == null)
             {
-                return RedirectToAction("Index", "Home");            
+                return RedirectToAction("Index", "Home");
             }
 
             model.PurchaseOrder.ProductId = (int)productId;
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 using (var db = new ApplicationDbContext())
                 {
@@ -78,6 +78,89 @@ namespace Wareh.Controllers
             }
 
             return RedirectToAction("Home", "Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var purchaseOrder = db.PurchaseOrders.Find(id);
+
+                if (purchaseOrder == null)
+                {
+                    RedirectToAction("Index");
+                }
+
+                var product = db.Products.Find(purchaseOrder.ProductId);
+                purchaseOrder.Product = product;
+
+                var viewModel = new PurchaseOrderViewModel();
+
+
+                viewModel.PurchaseOrder = purchaseOrder;
+                viewModel.Suppliers = purchaseOrder.Product.Suppliers.ToList();
+
+                return View(viewModel);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int? id, PurchaseOrderViewModel model)
+        {
+
+            using (var db = new ApplicationDbContext())
+            {
+                var purchaseOrder = db.PurchaseOrders.Find(id);
+
+                if (purchaseOrder == null)
+                {
+                    RedirectToAction("Index");
+                }
+
+                var product = db.Products.Find(purchaseOrder.ProductId);
+                purchaseOrder.Product = product;
+                purchaseOrder.MeasureUnit = model.PurchaseOrder.MeasureUnit;
+                purchaseOrder.Quantity = model.PurchaseOrder.Quantity;
+                purchaseOrder.SupplierId = model.PurchaseOrder.SupplierId;
+
+                if (ModelState.IsValid)
+                {   
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+
+                model = new PurchaseOrderViewModel
+                {
+                    PurchaseOrder = purchaseOrder,
+                    Suppliers = purchaseOrder.Product.Suppliers.ToList()
+                };
+
+            }
+
+            return View(model);
+
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var purchaseOrders = db.PurchaseOrders
+                    .Include(s => s.Supplier)
+                    .Include(p => p.Product)
+                    .SingleOrDefault(p => p.Id == id);
+
+                if (purchaseOrders == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                return View(purchaseOrders);
+            }
         }
     }
 }
