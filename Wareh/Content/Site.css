@@ -44,3 +44,13 @@ textarea {
 footer{
     text-align: center;
 }
+
+.dataTable{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    
+}
+
+.dataTable th{
+background-color: whitesmoke;
+}
