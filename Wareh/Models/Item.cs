@@ -29,6 +29,7 @@ namespace Wareh.Models
         public virtual PurchaseOrder PurchaseOrder { get; set; }
 
         [Column(TypeName = "datetime2")]
+        [Display(Name = "Created Date")]
         public DateTime? CreatedAt { get; set; }
 
     }

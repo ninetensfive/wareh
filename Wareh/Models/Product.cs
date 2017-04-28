@@ -17,6 +17,7 @@ namespace Wareh.Models
 
         [Required]
         [StringLength(255)]
+        [Display( Name = "Product")]
         public string Name { get; set; }
 
         [StringLength(255)]

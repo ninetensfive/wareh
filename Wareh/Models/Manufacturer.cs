@@ -12,6 +12,7 @@ namespace Wareh.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Manufacturer")]
         public string Name { get; set; }
 
         [StringLength(255)]
@@ -23,6 +24,7 @@ namespace Wareh.Models
         [StringLength(255)]
         public string Country { get; set; }
 
+        [Display(Name = "Home Page")]
         public string HomePage { get; set; }
 
     }
