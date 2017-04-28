@@ -52,7 +52,19 @@
                     @Html.DisplayFor(modelItem => item.CreatedAt)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ExecutedAt)
+                    @if (item.ExecutedAt == null)
+                    {
+                        @Html.ActionLink("Execute", "Execute", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })
+
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.ExecutedAt);
+                        
+
+                    }
+
+
                 </td>
                 <td>
                     <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@item.Id" class="btn btn-xs btn-warning">

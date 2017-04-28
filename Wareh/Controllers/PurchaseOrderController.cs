@@ -162,5 +162,31 @@ namespace Wareh.Controllers
                 return View(purchaseOrders);
             }
         }
+
+        [HttpGet]
+        public ActionResult Execute(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            using (var db = new ApplicationDbContext())
+            {
+                var purchaseOrder = db.PurchaseOrders.Find(id);
+
+                if (purchaseOrder == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                //purchaseOrder.ExecutedAt = DateTime.Now;
+                
+                db.SaveChanges();
+
+                return RedirectToAction("Create", "Item", new { purchaseOrderId = id});
+            }
+
+        }
     }
 }

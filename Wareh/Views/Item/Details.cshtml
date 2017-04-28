@@ -1,0 +1,78 @@
+﻿@model Wareh.ViewModels.ItemViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<span class="pull-right">
+
+    <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@Model.Item.Id" class="btn btn-warning">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit
+    </a>
+</span>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrder.Product.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrder.Product.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrder.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrder.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseOrder.MeasureUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseOrder.MeasureUnit)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Warehouse.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Warehouse.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Item.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Item.CreatedAt)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div>
+        <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Index" class="btn btn-default">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Back to List
+        </a>
+    </div>
+</p>
