@@ -1,27 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-
-namespace Wareh.Models
+﻿namespace Wareh.Models
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class PurchaseOrder
     {
         public PurchaseOrder()
         {
-            CreatedAt = DateTime.Now;
+            this.CreatedAt = DateTime.Now;
         }
 
         public int Id { get; set; }
 
         [Required]
         public int ProductId { get; set; }
+
         public Product Product { get; set; }
 
         [Display(Name = "Supplier")]
         public int SupplierId { get; set; }
+
         public Supplier Supplier { get; set; }
 
         [Required]
@@ -39,8 +38,5 @@ namespace Wareh.Models
         [Column(TypeName = "datetime2")]
         [Display(Name = "Executed Date")]
         public DateTime? ExecutedAt { get; set; }
-
-
-
     }
 }

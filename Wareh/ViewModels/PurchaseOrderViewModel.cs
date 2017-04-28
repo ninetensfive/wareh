@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Wareh.Models;
-
-namespace Wareh.ViewModels
+﻿namespace Wareh.ViewModels
 {
+    using System.Collections.Generic;
+    using Models;
+
     public class PurchaseOrderViewModel
     {
         public PurchaseOrder PurchaseOrder { get; set; }

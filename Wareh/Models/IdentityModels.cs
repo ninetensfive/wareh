@@ -1,11 +1,10 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-
-namespace Wareh.Models
+﻿namespace Wareh.Models
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
@@ -41,6 +40,5 @@ namespace Wareh.Models
         public System.Data.Entity.DbSet<Wareh.Models.Warehouse> Warehouses { get; set; }
 
         public System.Data.Entity.DbSet<Wareh.Models.Item> Items { get; set; }
-
     }
 }

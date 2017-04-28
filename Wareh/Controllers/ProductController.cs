@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Validation;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-using Wareh.ViewModels;
-using System.Data.Entity;
-
-
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Models;
+    using ViewModels;
+
     public class ProductController : Controller
     {
         [HttpGet]
@@ -37,14 +31,10 @@ namespace Wareh.Controllers
                 {
                     Manufacturers = manufacturers,
                     Suppliers = suppliers
-                    //Product = new Product()
-
                 };
-                //viewModel.Product.Suppliers = suppliers;
 
                 return View(viewModel);
             }
-
         }
 
         [HttpPost]
@@ -64,18 +54,15 @@ namespace Wareh.Controllers
                         Barcode = productViewModel.Product.Barcode,
                         ManufacturerId = productViewModel.Product.ManufacturerId,
                         Suppliers = suppliers,
-
                     };
 
                     db.Products.Add(product);
                     db.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index");
                 }
-
-
             }
-            //return new HttpNotFoundResult();
+
             using (var db = new ApplicationDbContext())
             {
                 var manufacturers = db.Manufacturers.ToList();
@@ -86,12 +73,10 @@ namespace Wareh.Controllers
                     Manufacturers = manufacturers,
                     Suppliers = suppliers,
                     Product = productViewModel.Product
-
                 };
 
                 return View(viewModel);
             }
-
         }
 
         [HttpGet]
@@ -105,6 +90,7 @@ namespace Wareh.Controllers
                 {
                     RedirectToAction("Index");
                 }
+
                 var manufacturers = db.Manufacturers.ToList();
                 var suppliers = db.Suppliers.ToList();
 
@@ -114,10 +100,6 @@ namespace Wareh.Controllers
                 viewModel.Suppliers = suppliers;
                 viewModel.SelectedSuppliers = product.Suppliers.Select(s => s.Id).ToList();
 
-
-
-
-
                 return View(viewModel);
             }
         }
@@ -125,7 +107,6 @@ namespace Wareh.Controllers
         [HttpPost]
         public ActionResult Edit(ProductViewModel productViewModel, int[] selectedSuppliers)
         {
-
             int? id = int.Parse(RouteData.Values["Id"].ToString());
 
             if (id == null)
@@ -133,10 +114,8 @@ namespace Wareh.Controllers
                 return RedirectToAction("Index");
             }
 
-
             using (var db = new ApplicationDbContext())
             {
-
                 var suppliers = db.Suppliers.Where(s => selectedSuppliers.Contains(s.Id)).ToList();
 
                 var product = db.Products.Find(id);
@@ -146,14 +125,10 @@ namespace Wareh.Controllers
                     product.Suppliers.Remove(product.Suppliers[i]);
                 }
 
-
-
                 product.Name = productViewModel.Product.Name;
                 product.Barcode = productViewModel.Product.Barcode;
                 product.ManufacturerId = productViewModel.Product.ManufacturerId;
                 product.Suppliers = suppliers;
-
-
 
                 if (ModelState.IsValid)
                 {
@@ -163,6 +138,7 @@ namespace Wareh.Controllers
                 }
 
                 var manufacturers = db.Manufacturers.ToList();
+
                 suppliers = db.Suppliers.ToList();
 
                 productViewModel.Manufacturers = manufacturers;
@@ -170,7 +146,6 @@ namespace Wareh.Controllers
             }
 
             return View(productViewModel);
-
         }
 
         [HttpGet]

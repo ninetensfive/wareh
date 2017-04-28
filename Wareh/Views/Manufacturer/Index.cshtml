@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br>
-    <h2 class="modal-header">
-        @ViewContext.RouteData.GetRequiredString("controller")
-        <p class="pull-right">
-            @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
-        </p>
-    </h2>
+<h2 class="modal-header">
+    @ViewContext.RouteData.GetRequiredString("controller")
+    <span class="pull-right">
+        @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
+    </span>
+</h2>
 
 
 
@@ -52,7 +52,10 @@
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HomePage)
+                    @if (item.HomePage != null)
+                    {
+                        <a href="@item.HomePage">@item.Name</a>
+                    }
                 </td>
                 <td>
                     <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@item.Id" class="btn btn-xs btn-warning">

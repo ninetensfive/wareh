@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Wareh.Models
+﻿namespace Wareh.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Manufacturer
     {
         public int Id { get; set; }
@@ -26,6 +22,5 @@ namespace Wareh.Models
 
         [Display(Name = "Home Page")]
         public string HomePage { get; set; }
-
     }
 }

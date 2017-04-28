@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using Wareh.Models;
+
     public class WarehouseController : Controller
     {
         [HttpGet]
@@ -39,6 +36,7 @@ namespace Wareh.Controllers
                     return RedirectToAction("Index");
                 }
             }
+
             return View(warehouse);
         }
 
@@ -53,7 +51,6 @@ namespace Wareh.Controllers
                 {
                     RedirectToAction("Index");
                 }
-
 
                 return View(warehouse);
             }
@@ -77,7 +74,6 @@ namespace Wareh.Controllers
                     warehouse.Address = model.Address;
                     warehouse.City = model.City;
                     warehouse.Country = model.Country;
-
 
                     db.SaveChanges();
 
@@ -103,6 +99,5 @@ namespace Wareh.Controllers
                 return View(warehouse);
             }
         }
-
     }
 }

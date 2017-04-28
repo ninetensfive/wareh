@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-using Wareh.ViewModels;
-using System.Data.Entity;
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Models;
+    using ViewModels;
+
     public class ItemController : Controller
     {
         [HttpGet]
@@ -24,7 +22,6 @@ namespace Wareh.Controllers
                     .ToList();
                 return View(items);
             }
-
         }
 
         [HttpGet]
@@ -46,7 +43,7 @@ namespace Wareh.Controllers
 
                 var existingItem = db.Items.SingleOrDefault(i => i.PurchaseOrderId == purchaseOrderId);
 
-                if ( existingItem != null)
+                if (existingItem != null)
                 {
                     return RedirectToAction("Edit", new { id = existingItem.Id });
                 }
@@ -61,9 +58,7 @@ namespace Wareh.Controllers
                 viewModel.Warehouses = warehouses;
 
                 return View(viewModel);
-
             }
-
         }
 
         [HttpPost]
@@ -87,7 +82,7 @@ namespace Wareh.Controllers
                 item.WarehouseId = model.Item.WarehouseId;
                 item.Location = model.Item.Location;
                 item.PurchaseOrderId = (int)purchaseOrderId;
-             
+
                 db.Items.Add(item);
                 db.SaveChanges();
 
@@ -97,10 +92,8 @@ namespace Wareh.Controllers
                 db.SaveChanges();
 
                 return RedirectToAction("Details", new { id = item.Id });
-
             }
         }
-
 
         [HttpGet]
         public ActionResult Edit(int? id)
@@ -119,8 +112,6 @@ namespace Wareh.Controllers
                     .Include(w => w.Warehouse)
                     .SingleOrDefault(i => i.Id == id);
 
-
-                
                 if (item == null)
                 {
                     RedirectToAction("Index");
@@ -128,7 +119,7 @@ namespace Wareh.Controllers
 
                 var viewModel = new ItemViewModel();
                 viewModel.Item = item;
-                viewModel.Warehouses = db.Warehouses.ToList(); 
+                viewModel.Warehouses = db.Warehouses.ToList();
 
                 return View(viewModel);
             }
@@ -151,8 +142,6 @@ namespace Wareh.Controllers
                     .Include(w => w.Warehouse)
                     .SingleOrDefault(i => i.Id == id);
 
-
-
                 if (item == null)
                 {
                     RedirectToAction("Index");
@@ -171,7 +160,7 @@ namespace Wareh.Controllers
 
                     db.SaveChanges();
 
-                    return RedirectToAction("Details", new { id = item.Id});
+                    return RedirectToAction("Details", new { id = item.Id });
                 }
 
                 var viewModel = new ItemViewModel();
@@ -199,8 +188,6 @@ namespace Wareh.Controllers
                 viewModel.Item = item;
                 viewModel.PurchaseOrder = db.PurchaseOrders.Find(item.PurchaseOrderId);
                 viewModel.PurchaseOrder.Product = db.Products.Find(viewModel.PurchaseOrder.ProductId);
-
-
 
                 return View(viewModel);
             }

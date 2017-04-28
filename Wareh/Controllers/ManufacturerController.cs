@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using Models;
+
     public class ManufacturerController : Controller
     {
         [HttpGet]
@@ -26,7 +23,6 @@ namespace Wareh.Controllers
             return View();
         }
 
-
         [HttpPost]
         public ActionResult Create(Manufacturer manufacturer)
         {
@@ -40,6 +36,7 @@ namespace Wareh.Controllers
                     return RedirectToAction("Index");
                 }
             }
+
             return View(manufacturer);
         }
 
@@ -54,7 +51,6 @@ namespace Wareh.Controllers
                 {
                     RedirectToAction("Index");
                 }
-
 
                 return View(manufacturer);
             }

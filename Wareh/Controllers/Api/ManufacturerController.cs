@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using Wareh.Models;
-
-namespace Wareh.Controllers.Api
+﻿namespace Wareh.Controllers.Api
 {
+    using System.Linq;
+    using System.Net;
+    using System.Web.Http;
+    using Models;
+
     public class ManufacturerController : ApiController
     {
         [HttpDelete]
@@ -17,14 +14,13 @@ namespace Wareh.Controllers.Api
             {
                 var manufacturer = db.Manufacturers.SingleOrDefault(m => m.Id == id);
 
-                if(manufacturer == null)
+                if (manufacturer == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
 
                 db.Manufacturers.Remove(manufacturer);
                 db.SaveChanges();
-
             }
         }
     }

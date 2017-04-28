@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Wareh.Models
+﻿namespace Wareh.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Supplier
     {
         public Supplier()
@@ -33,6 +30,5 @@ namespace Wareh.Models
         public string HomePage { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }
-
     }
 }

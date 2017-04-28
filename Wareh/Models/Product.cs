@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Wareh.Models
+﻿namespace Wareh.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class Product
     {
         public Product()
@@ -17,7 +14,7 @@ namespace Wareh.Models
 
         [Required]
         [StringLength(255)]
-        [Display( Name = "Product")]
+        [Display(Name = "Product")]
         public string Name { get; set; }
 
         [StringLength(255)]

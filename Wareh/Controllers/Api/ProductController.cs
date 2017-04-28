@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using Wareh.Models;
-
-namespace Wareh.Controllers.Api
+﻿namespace Wareh.Controllers.Api
 {
+    using System.Linq;
+    using System.Net;
+    using System.Web.Http;
+    using Models;
+
     public class ProductController : ApiController
     {
         [HttpDelete]
@@ -24,7 +21,6 @@ namespace Wareh.Controllers.Api
 
                 db.Products.Remove(product);
                 db.SaveChanges();
-
             }
         }
     }

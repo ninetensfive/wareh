@@ -50,7 +50,10 @@
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HomePage)
+                    @if (item.HomePage != null)
+                    {
+                        <a href="@item.HomePage">@item.Name</a>
+                    }
                 </td>
                 <td>
                     <a href="/@ViewContext.RouteData.GetRequiredString("controller")/Edit/@item.Id" class="btn btn-xs btn-warning">

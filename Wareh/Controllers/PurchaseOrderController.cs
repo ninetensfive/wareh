@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-using Wareh.ViewModels;
-using System.Data.Entity;
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Web.Mvc;
+    using Models;
+    using ViewModels;
+
     public class PurchaseOrderController : Controller
     {
         [HttpGet]
@@ -52,8 +49,6 @@ namespace Wareh.Controllers
 
                 return View(viewModel);
             }
-
-
         }
 
         [HttpPost]
@@ -97,19 +92,16 @@ namespace Wareh.Controllers
 
                 var viewModel = new PurchaseOrderViewModel();
 
-
                 viewModel.PurchaseOrder = purchaseOrder;
                 viewModel.Suppliers = purchaseOrder.Product.Suppliers.ToList();
 
                 return View(viewModel);
             }
-
         }
 
         [HttpPost]
         public ActionResult Edit(int? id, PurchaseOrderViewModel model)
         {
-
             using (var db = new ApplicationDbContext())
             {
                 var purchaseOrder = db.PurchaseOrders.Find(id);
@@ -126,7 +118,7 @@ namespace Wareh.Controllers
                 purchaseOrder.SupplierId = model.PurchaseOrder.SupplierId;
 
                 if (ModelState.IsValid)
-                {   
+                {
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -137,11 +129,9 @@ namespace Wareh.Controllers
                     PurchaseOrder = purchaseOrder,
                     Suppliers = purchaseOrder.Product.Suppliers.ToList()
                 };
-
             }
 
             return View(model);
-
         }
 
         [HttpGet]
@@ -180,13 +170,10 @@ namespace Wareh.Controllers
                     return RedirectToAction("Index");
                 }
 
-                //purchaseOrder.ExecutedAt = DateTime.Now;
-                
                 db.SaveChanges();
 
-                return RedirectToAction("Create", "Item", new { purchaseOrderId = id});
+                return RedirectToAction("Create", "Item", new { purchaseOrderId = id });
             }
-
         }
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Wareh.Models;
-
-namespace Wareh.Controllers
+﻿namespace Wareh.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using Models;
+
     public class SupplierController : Controller
     {
         [HttpGet]
@@ -39,6 +36,7 @@ namespace Wareh.Controllers
                     return RedirectToAction("Index");
                 }
             }
+
             return View(supplier);
         }
 
@@ -53,7 +51,6 @@ namespace Wareh.Controllers
                 {
                     RedirectToAction("Index");
                 }
-
 
                 return View(supplier);
             }
@@ -79,7 +76,6 @@ namespace Wareh.Controllers
                     supplier.Country = model.Country;
                     supplier.HomePage = model.HomePage;
                    
-
                     db.SaveChanges();
 
                     return RedirectToAction("Details", new { id = model.Id });

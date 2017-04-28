@@ -218,7 +218,9 @@
     <Compile Include="Controllers\Api\SupplierController.cs" />
     <Compile Include="Controllers\Api\WarehouseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\ItemController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
