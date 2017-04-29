@@ -10,6 +10,7 @@
     public class ItemController : Controller
     {
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new ApplicationDbContext())
@@ -25,6 +26,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create(int? purchaseOrderId)
         {
             if (purchaseOrderId == null)
@@ -62,6 +64,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(int? purchaseOrderId, ItemViewModel model)
         {
             if (purchaseOrderId == null || model == null)
@@ -96,6 +99,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -126,6 +130,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(int? id, ItemViewModel model)
         {
             if (id == null)
@@ -171,6 +176,8 @@
             }
         }
 
+        [HttpGet]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             using (var db = new ApplicationDbContext())

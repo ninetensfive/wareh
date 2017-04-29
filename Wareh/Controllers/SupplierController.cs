@@ -7,6 +7,7 @@
     public class SupplierController : Controller
     {
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new ApplicationDbContext())
@@ -18,12 +19,14 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Supplier supplier)
         {
             if (ModelState.IsValid)
@@ -41,6 +44,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             using (var db = new ApplicationDbContext())
@@ -57,6 +61,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(Supplier model)
         {
             if (ModelState.IsValid)
@@ -86,6 +91,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             using (var db = new ApplicationDbContext())

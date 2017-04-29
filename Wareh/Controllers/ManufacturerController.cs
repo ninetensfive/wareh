@@ -7,6 +7,7 @@
     public class ManufacturerController : Controller
     {
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new ApplicationDbContext())
@@ -18,12 +19,14 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(Manufacturer manufacturer)
         {
             if (ModelState.IsValid)
@@ -41,6 +44,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             using (var db = new ApplicationDbContext())
@@ -57,6 +61,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(Manufacturer model)
         {
             if (ModelState.IsValid)
@@ -86,6 +91,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             using (var db = new ApplicationDbContext())

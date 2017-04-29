@@ -8,6 +8,7 @@
     public class ItemController : ApiController
     {
         [HttpDelete]
+        [Authorize]
         public void Delete(int id)
         {
             using (var db = new ApplicationDbContext())

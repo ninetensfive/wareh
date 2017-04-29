@@ -12,6 +12,7 @@
     public class ProductController : Controller
     {
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new ApplicationDbContext())
@@ -23,6 +24,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             using (var db = new ApplicationDbContext())
@@ -41,6 +43,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(ProductViewModel productViewModel, HttpPostedFileBase file, int[] selectedSuppliers)
         {
             string imagePath = String.Empty;
@@ -106,6 +109,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             using (var db = new ApplicationDbContext())
@@ -131,6 +135,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(ProductViewModel productViewModel, int[] selectedSuppliers)
         {
             int? id = int.Parse(RouteData.Values["Id"].ToString());
@@ -175,6 +180,7 @@
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Details(int? id)
         {
             using (var db = new ApplicationDbContext())
