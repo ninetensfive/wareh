@@ -10,7 +10,10 @@ Very Simple Warehouse system created for Sotfware Technologies exam February, 20
 	-Enable-Eigrations
 	-Update-Database
 	
-## Usage
+## Requirements
+https://jquery.com/
+https://datatables.net/
+http://bootboxjs.com/
 
 ## History
 
