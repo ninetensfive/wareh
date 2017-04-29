@@ -44,6 +44,11 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseOrder.Product.Name)
+                    @if (item.PurchaseOrder.Product.Image != null)
+                    {
+                        <br>
+                        <img src="/@item.PurchaseOrder.Product.Image" class="img-responsive img-thumbnail" style="max-width: 120px" />
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseOrder.Quantity)

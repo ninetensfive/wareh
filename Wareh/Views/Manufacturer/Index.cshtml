@@ -4,15 +4,13 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<br>
+
 <h2 class="modal-header">
     @ViewContext.RouteData.GetRequiredString("controller")
     <span class="pull-right">
         @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
     </span>
 </h2>
-
-
 
 <table class="table" id="manufacturers">
     <thead>

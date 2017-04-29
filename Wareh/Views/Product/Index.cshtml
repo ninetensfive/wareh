@@ -11,6 +11,7 @@
         @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-success" })
     </p>
 </h2>
+
 <table class="table" id="products">
     <thead>
         <tr>
@@ -37,13 +38,17 @@
         {
             <tr>
                 <td>
-                    <a href="/PurchaseOrder/Create?productId=@item.Id">
-                        <span class="glyphicon glyphicon-book">
-                        </span>
-                    </a>
-                    @Html.DisplayFor(modelItem => item.Name)
-                    <img src="@item.Image" class="img-responsive"/>
-                </td>
+    <a href="/PurchaseOrder/Create?productId=@item.Id">
+        <span class="glyphicon glyphicon-book">
+        </span>
+    </a>
+    @Html.DisplayFor(modelItem => item.Name)
+    @if (item.Image != null)
+    {
+        <br>
+        <img src="/@item.Image" class="img-responsive img-thumbnail" style="max-width: 120px" />
+    }
+            </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Barcode)
                 </td>
