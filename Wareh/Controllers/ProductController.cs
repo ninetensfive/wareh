@@ -5,6 +5,9 @@
     using System.Web.Mvc;
     using Models;
     using ViewModels;
+    using System.Web;
+    using System.IO;
+    using System;
 
     public class ProductController : Controller
     {
@@ -38,10 +41,32 @@
         }
 
         [HttpPost]
-        public ActionResult Create(ProductViewModel productViewModel, int[] selectedSuppliers)
+        public ActionResult Create(ProductViewModel productViewModel, HttpPostedFileBase file, int[] selectedSuppliers)
         {
+            string imagePath = String.Empty;
+
             if (ModelState.IsValid)
             {
+                if (file != null && file.ContentLength > 0)
+                    try
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content/Images/Upload"),
+                                                   Path.GetFileName(file.FileName));
+                        imagePath = "Content/Images/Upload/" + 
+                                                   Path.GetFileName(file.FileName);
+
+                        file.SaveAs(path);
+                        ViewBag.Message = "File uploaded successfully";
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                    }
+                else
+                {
+                    ViewBag.Message = "You have not specified a file.";
+                }
+
                 using (var db = new ApplicationDbContext())
                 {
                     //var suppliers = new HashSet<Supplier>();
@@ -51,6 +76,7 @@
                     var product = new Product
                     {
                         Name = productViewModel.Product.Name,
+                        Image = imagePath,
                         Barcode = productViewModel.Product.Barcode,
                         ManufacturerId = productViewModel.Product.ManufacturerId,
                         Suppliers = suppliers,
