@@ -136,8 +136,9 @@
 
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(ProductViewModel productViewModel, int[] selectedSuppliers)
+        public ActionResult Edit(ProductViewModel productViewModel, HttpPostedFileBase file, int[] selectedSuppliers)
         {
+            string imagePath = String.Empty;
             int? id = int.Parse(RouteData.Values["Id"].ToString());
 
             if (id == null)
@@ -163,6 +164,28 @@
 
                 if (ModelState.IsValid)
                 {
+                    if (file != null && file.ContentLength > 0)
+                        try
+                        {
+                            string path = Path.Combine(Server.MapPath("~/Content/Images/Upload"),
+                                                       Path.GetFileName(file.FileName));
+                            imagePath = "Content/Images/Upload/" +
+                                                       Path.GetFileName(file.FileName);
+
+                            file.SaveAs(path);
+                            ViewBag.Message = "File uploaded successfully";
+                        }
+                        catch (Exception ex)
+                        {
+                            ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                        }
+                    else
+                    {
+                        ViewBag.Message = "You have not specified a file.";
+                    }
+
+                    product.Image = imagePath;
+
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
