@@ -157,6 +157,7 @@
                     product.Suppliers.Remove(product.Suppliers[i]);
                 }
 
+                //product.Id = (int)id;
                 product.Name = productViewModel.Product.Name;
                 product.Barcode = productViewModel.Product.Barcode;
                 product.ManufacturerId = productViewModel.Product.ManufacturerId;
